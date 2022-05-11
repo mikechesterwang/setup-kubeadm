@@ -43,8 +43,11 @@ sudo apt-get update
 sudo apt-get install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
-# kubeadm control-plane 
+# kubeadm (control-plane)
 sudo kubeadm init --cri-socket unix://var/run/cri-dockerd/sock --control-plane-endpoint 172.31.30.11:6443 ----pod-network-cidr 172.31.0.0/16
+
+# kubeadm (worker node) join
+sudo kubeadm join 172.31.30.11:6443 --token zfb0j4.f6g5jdu5rd6ft3mm --discovery-token-ca-cert-hash sha256:848edcb354a4391ea62cebeeb05730e87640c8297106a4b75bb23a502a2a140f --cri-socket unix://var/run/cri-dockerd.sock
 
 # setup kubectl 
 unset KUBECONFIG
@@ -52,8 +55,9 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-# apply flannel
+# apply flannel (control-plane)
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
+
 
 
 
