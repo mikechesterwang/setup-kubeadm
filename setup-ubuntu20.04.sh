@@ -5,22 +5,17 @@ echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers
 echo "deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable:/cri-o:/$CRIO_VERSION/$OS/ /"|sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable:cri-o:$CRIO_VERSION.list
 
 curl -L https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable:cri-o:$CRIO_VERSION/$OS/Release.key | sudo apt-key add - 
-curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/Release.key | sudo apt-key add -
+curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/$OS/Release.key | sudo apt-key add - 
 
 sudo apt update
-sudo apt install cri-o cri-o-runc
+sudo apt install -y cri-o cri-o-runc
 
 sudo systemctl enable crio.service
 sudo systemctl start crio.service
 
-sudo apt install cri-tools
+sudo apt install -y cri-tools
 
 # iptables
-sudo modprobe br_netfilter
-cat <<EOF | sudo tee /etc/modules-load.d/k8s.confoverlay
-br_netfilter
-EOF
-
 sudo modprobe overlay
 sudo modprobe br_netfilter
 
