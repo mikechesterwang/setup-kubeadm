@@ -38,9 +38,3 @@ sudo apt-get update
 sudo apt-get install -y kubelet=1.21.0-00 kubeadm=1.21.0-00 kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
-# setup kubectl
-unset KUBECONFIG
-mkdir -p $HOME/.kube
-sudo rm -f $HOME/.kube/config
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
