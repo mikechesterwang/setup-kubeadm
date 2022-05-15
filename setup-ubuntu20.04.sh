@@ -38,8 +38,6 @@ sudo apt-get update
 sudo apt-get install -y kubelet=1.21.0-00 kubeadm=1.21.0-00 kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
-sudo ufw allow 10250
-sudo ufw allow 6443
-sudo ufw allow 30000:32767
+sudo ufw disable
 
 echo 'kubeadm all set'
