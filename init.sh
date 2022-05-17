@@ -14,6 +14,7 @@ if [ "${endpoint}" == "" ]; then
   exit 1
 fi
 
+sudo modprobe br_netfilter
 sudo kubeadm init --cri-socket unix:///var/run/crio/crio.sock --pod-network-cidr 10.244.0.0/16 --control-plane-endpoint $endpoint:6443
 
 # setup kubectl
