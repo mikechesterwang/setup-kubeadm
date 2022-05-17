@@ -36,6 +36,7 @@ if [ "${cert}" == "" ]; then
   exit 1
 fi
 
+sudo modprobe br_netfilter
 if [ "${control_plane}" == 1 ]; then
   sudo kubeadm join $endpoint:6443 --cri-socket unix:///var/run/crio/crio.sock --token $token --discovery-token-ca-cert-hash sha256:$cert --control-plane
 else
