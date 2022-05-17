@@ -4,7 +4,6 @@ else
     control_plane_ip=${ENDPOINT_IP}
 fi
 
-curl -s https://raw.githubusercontent.com/mikechesterwang/setup-kubeadm/main/setup-ubuntu20.04.sh | sudo bash
 sudo kubeadm init --cri-socket unix:///var/run/crio/crio.sock --pod-network-cidr 10.244.0.0/16 --control-plane-endpoint $control_plane_ip:6443
 
 # setup kubectl
